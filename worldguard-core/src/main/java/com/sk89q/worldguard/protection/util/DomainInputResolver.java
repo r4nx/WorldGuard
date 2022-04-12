@@ -122,7 +122,7 @@ public class DomainInputResolver implements Callable<DefaultDomain> {
         if (!namesToQuery.isEmpty()) {
             try {
                 for (Profile profile : profileService.findAllByName(namesToQuery)) {
-                    namesToQuery.remove(profile.getName());
+                    namesToQuery.removeIf(name -> name.equalsIgnoreCase(profile.getName()));
                     domain.addPlayer(profile.getUniqueId());
                 }
             } catch (IOException e) {
